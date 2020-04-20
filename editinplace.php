@@ -14,7 +14,7 @@ if (isset($_POST) && count($_POST)>0)
 	}
 	else
 	{
-		$query=$db->query("update paquete set ".$_POST["campo"]."='".$_POST["valor"]."' where id_paquete='".intval($_POST["id"])."' limit 1");
+		$query=$db->query("update categoria set ".$_POST["campo"]."='".$_POST["valor"]."' where id_categoria='".intval($_POST["id"])."' limit 1");
 		if ($query) echo "<span class='ok'>Valores modificados correctamente.</span>";
 		else echo "<span class='ko'>".$db->error."</span>";
 	}
@@ -30,13 +30,12 @@ if (isset($_GET) && count($_GET)>0)
 	{   
 		// select * from editinplace order by idusuario asc
 		
-		$query=$db->query("SELECT * FROM paquete ");
+		$query=$db->query("SELECT * FROM categoria where  idusuario='$x1'");
 		$datos=array();
 		while ($usuarios=$query->fetch_array())
 		{
-			$datos[]=array(	"id"=>$usuarios["id_paquete"],
-							"nombre_p"=>$usuarios["nombre_p"],
-							"precio"=>$usuarios["precio"]
+			$datos[]=array(	"id"=>$usuarios["id_categoria"],
+							"nombre"=>$usuarios["nombre"]
 						
 			);
 		}

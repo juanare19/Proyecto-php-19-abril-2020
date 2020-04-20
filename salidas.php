@@ -25,17 +25,18 @@ if (isset($_GET) && count($_GET)>0)
 	{   
 		// select * from editinplace order by idusuario asc
 		
-		$query=$db->query("SELECT * FROM `ingresos` INNER JOIN service ON ingresos.id_service_id_ingreso=service.id_service INNER JOIN proveedor ON ingresos.id_proveedor_id_ingreso=proveedor.id_proveedor where id_ingreso=$idu");
+		$query=$db->query("SELECT * FROM `salida` INNER JOIN service ON salida.id_service_id_salida=service.id_service INNER JOIN user ON salida.id_user_id_salida =user.id_user where id_salida=$idu");
 		$datos=array();
 		while ($usuarios=$query->fetch_array())
 		{
-			$datos[]=array(	"id"=>$usuarios["id_ingreso"],
+			$datos[]=array(	"id"=>$usuarios["id_salida"],
 							"nombre"=>$usuarios["name_service"],
-							"cantida"=>$usuarios["cantida_movimiento"],
-							"fecha"=>$usuarios["fecha_ingreso"],
-							"proveedor"=>$usuarios["nombre_proveedor"],
+							"cantida"=>$usuarios["cantida_salida"],
+							"fecha"=>$usuarios["fecha_salida"],
+							"proveedor"=>$usuarios["name_user"],
 							"imagen"=>$usuarios["imagen"],
-							"motivo"=>$usuarios["motivo"]
+							"motivo"=>$usuarios["motivo_salida"]
+							
 
 							
 						

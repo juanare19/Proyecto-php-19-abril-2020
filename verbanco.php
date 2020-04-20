@@ -9,7 +9,7 @@ if (isset($_POST) && count($_POST)>0)
 	}
 	else
 	{
-		$query=$db->query("update ingresos set ".$_POST["campo"]."='".$_POST["valor"]."' where id_ingreso='".intval($_POST["id"])."' limit 1");
+		$query=$db->query("update accounts set ".$_POST["campo"]."='".$_POST["valor"]."' where id_accounts='".intval($_POST["id"])."' limit 1");
 		if ($query) echo "<span class='ok'>Valores modificados correctamente.</span>";
 		else echo "<span class='ko'>".$db->error."</span>";
 	}
@@ -25,19 +25,17 @@ if (isset($_GET) && count($_GET)>0)
 	{   
 		// select * from editinplace order by idusuario asc
 		
-		$query=$db->query("SELECT * FROM `ingresos` INNER JOIN service ON ingresos.id_service_id_ingreso=service.id_service INNER JOIN proveedor ON ingresos.id_proveedor_id_ingreso=proveedor.id_proveedor where id_ingreso=$idu");
+		$query=$db->query("SELECT * FROM accounts where id_accounts=$idu");
 		$datos=array();
 		while ($usuarios=$query->fetch_array())
 		{
-			$datos[]=array(	"id"=>$usuarios["id_ingreso"],
-							"nombre"=>$usuarios["name_service"],
-							"cantida"=>$usuarios["cantida_movimiento"],
-							"fecha"=>$usuarios["fecha_ingreso"],
-							"proveedor"=>$usuarios["nombre_proveedor"],
-							"imagen"=>$usuarios["imagen"],
-							"motivo"=>$usuarios["motivo"]
-
-							
+			$datos[]=array(	"id"=>$usuarios["id_accounts"],
+							"nombre"=>$usuarios["name_bank_accounts"],
+							"tipo"=>$usuarios["tipe_accounts"],
+							"propietario"=>$usuarios["name_accounts"],
+							"num"=>$usuarios["num_accounts"],
+							"email"=>$usuarios["mail_accounts"],
+							"ci"=>$usuarios["ci_accounts"]
 						
 			);
 		}

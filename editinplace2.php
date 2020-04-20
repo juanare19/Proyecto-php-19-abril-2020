@@ -4,8 +4,7 @@
 include '../inc/config.php';
 
 
- $idu=$_GET['idu'];
-
+$idu=$_GET['idu'];
 
 
 
@@ -17,7 +16,7 @@ if (isset($_POST) && count($_POST)>0)
 	}
 	else
 	{
-		$query=$db->query("update service set ".$_POST["campo"]."='".$_POST["valor"]."' where id_service='".intval($_POST["id"])."' limit 1");
+		$query=$db->query("update user set ".$_POST["campo"]."='".$_POST["valor"]."' where id_user='".intval($_POST["id"])."' limit 1");
 		if ($query) echo "<span class='ok'>Valores modificados correctamente.</span>";
 		else echo "<span class='ko'>".$db->error."</span>";
 	}
@@ -33,17 +32,15 @@ if (isset($_GET) && count($_GET)>0)
 	{   
 		// select * from editinplace order by idusuario asc
 		
-		$query=$db->query("SELECT * FROM service where id_service=$idu");
+		$query=$db->query("SELECT * FROM user where id_user='".$idu."'");
 		$datos=array();
 		while ($usuarios=$query->fetch_array())
 		{
-			$datos[]=array(	"id"=>$usuarios["id_service"],
-							"nombre"=>$usuarios["name_service"],
-							"precio"=>$usuarios["price_service"],
-							"cantida"=>$usuarios["cantida"],
-							"tipo"=>$usuarios["tipo_producto"],
-							"info"=>$usuarios["info_service"],
-							"imagen"=>$usuarios["imagen"]
+			$datos[]=array(	"id"=>$usuarios["id_user"],
+							"nombre"=>$usuarios["name_user"],
+							"apellido"=>$usuarios["last_name_user"],
+							"pw"=>$usuarios["pw_user"],
+							"correo"=>$usuarios["mail_user"]
 						
 			);
 		}
